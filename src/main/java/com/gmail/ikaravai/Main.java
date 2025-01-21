@@ -1,9 +1,11 @@
 package com.gmail.ikaravai;
 
 import com.gmail.ikaravai.problems.Fibonacci;
+import com.gmail.ikaravai.problems.HanoiTower;
 import com.gmail.ikaravai.problems.LettersCounter;
 import com.gmail.ikaravai.util.CustomLogFormatter;
 
+import java.util.Stack;
 import java.util.logging.Logger;
 
 public class Main {
@@ -14,7 +16,8 @@ public class Main {
         setLogFormat();
 
 //        lettersCounter();
-        fibonacci();
+//        fibonacci();
+        hanoiTower();
     }
 
     private static void lettersCounter() {
@@ -30,6 +33,29 @@ public class Main {
         var recursiveResult = fibonacci.calculateRecursive(recursiveInput);
         var memorizationResult = fibonacci.calculateWithMemory(memorizationInput);
         logger.info(() -> STR."recursive N\{recursiveInput}: \{recursiveResult}, memorization N\{memorizationInput}: \{memorizationResult}");
+    }
+
+    private static void hanoiTower() {
+        int numberOfDisks = 10; // tower height
+        boolean muteOperations = true; // controls output of specific moves
+
+        var fromRod = new Stack<Integer>();
+        var auxiliaryRod = new Stack<Integer>();
+        var toRod = new Stack<Integer>();
+
+        // Populate the first rod
+        for (int i = numberOfDisks; i >= 1; i--) {
+            fromRod.push(i);
+        }
+
+        // initial state
+        logger.info(() -> fromRod + System.lineSeparator() + auxiliaryRod + System.lineSeparator() + toRod + System.lineSeparator());
+
+        var hanoiTower = new HanoiTower(fromRod, toRod, auxiliaryRod, muteOperations);
+        hanoiTower.solve(fromRod.size(), fromRod, toRod, auxiliaryRod);
+
+        // result state
+        logger.info(() -> fromRod + System.lineSeparator() + auxiliaryRod + System.lineSeparator() + toRod + System.lineSeparator());
     }
 
     private static void setLogFormat() {
