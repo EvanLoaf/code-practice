@@ -3,7 +3,9 @@ package com.gmail.ikaravai;
 import com.gmail.ikaravai.problems.Fibonacci;
 import com.gmail.ikaravai.problems.HanoiTower;
 import com.gmail.ikaravai.problems.LettersCounter;
+import com.gmail.ikaravai.problems.StringPermutation;
 import com.gmail.ikaravai.util.CustomLogFormatter;
+import com.gmail.ikaravai.util.ExecutionTimer;
 
 import java.util.Stack;
 import java.util.logging.Logger;
@@ -17,7 +19,8 @@ public class Main {
 
 //        lettersCounter();
 //        fibonacci();
-        hanoiTower();
+//        hanoiTower();
+        stringPermutation();
     }
 
     private static void lettersCounter() {
@@ -56,6 +59,13 @@ public class Main {
 
         // result state
         logger.info(() -> fromRod + System.lineSeparator() + auxiliaryRod + System.lineSeparator() + toRod + System.lineSeparator());
+    }
+
+    private static void stringPermutation() {
+        var stringPermutation = new StringPermutation();
+        var input = "input123";
+        Class<?>[] paramTypes = { String.class, String.class };
+        ExecutionTimer.invokeWithTimer(stringPermutation, "permute", paramTypes, input, "");
     }
 
     private static void setLogFormat() {
