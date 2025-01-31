@@ -4,23 +4,43 @@ import com.gmail.ikaravai.problems.Fibonacci;
 import com.gmail.ikaravai.problems.HanoiTower;
 import com.gmail.ikaravai.problems.LettersCounter;
 import com.gmail.ikaravai.problems.StringPermutation;
+import com.gmail.ikaravai.sort.BubbleSort;
 import com.gmail.ikaravai.util.CustomLogFormatter;
 import com.gmail.ikaravai.util.ExecutionTimer;
 
-import java.util.Stack;
+import java.util.*;
+import java.util.concurrent.*;
+import java.util.concurrent.atomic.AtomicInteger;
+import java.util.concurrent.locks.ReentrantLock;
+import java.util.concurrent.locks.StampedLock;
 import java.util.logging.Logger;
+import java.util.stream.IntStream;
+import java.util.stream.Stream;
 
 public class Main {
-
     private static final Logger logger = Logger.getLogger("Java shenanigans");
 
     public static void main(String[] args) {
         setLogFormat();
 
+        sandbox();
+
+
 //        lettersCounter();
 //        fibonacci();
 //        hanoiTower();
-        stringPermutation();
+//        stringPermutation();
+        bubbleSort();
+    }
+
+    private static void bubbleSort() {
+        var bubbleSort = new BubbleSort();
+        List<Integer> input = new ArrayList<>(IntStream.range(0, 100).boxed().toList());
+        Collections.shuffle(input);
+        System.out.println(input);
+        logger.info(STR."Input: \{input}");
+        var result = bubbleSort.sort(input.stream().mapToInt(Integer::intValue).toArray());
+        logger.info(STR."Result: \{Arrays.toString(result)}");
     }
 
     private static void lettersCounter() {
@@ -72,4 +92,57 @@ public class Main {
         Logger rootLogger = Logger.getLogger("");
         rootLogger.getHandlers()[0].setFormatter(new CustomLogFormatter());
     }
+
+    private static void sandbox() {
+        //        try {
+//            main(args);
+//        } catch (StackOverflowError e) {
+//            main(args);
+//        }
+
+//        int[][] arr = {{1,2,3},{4,5,6},{7,8,9}};
+//        System.out.println(Arrays.deepToString(arr));
+
+//        List<String> list = new ArrayList<>();
+//        Set<String> set = new HashSet<>();
+//        Map<String, Integer> mapa = new HashMap<>();
+//        Object asd = new Object();
+//
+//        int[] numbs1 = new int[]{1,2,3};
+//        System.out.println(Arrays.hashCode(numbs1));
+//
+//        int[] numbs2 = new int[]{1,2,3};
+//        System.out.println(Arrays.hashCode(numbs2));
+
+//        A obj = new B();
+//        obj.a();
+//
+//        var t = Thread.ofVirtual().unstarted(() -> System.out.println("Test"));
+//        new Thread(() -> {});
+//
+//        Map<String, String> map = new ConcurrentHashMap<>();
+//        var asd = new AtomicInteger(7);
+//        var qwe = new ThreadLocal<String>();
+//        new ReentrantLock();
+//        ExecutorService exec = Executors.newFixedThreadPool(3);
+//        var sss = new CompletableFuture<String>();
+////        sss.completeAsync();
+////        var tt = new ForkJoinTask<String>();
+//        var ll = new LinkedList<String>();
+//        var it = ll.listIterator();
+//        List<String> stack = new Stack<>();
+    }
+
+    //    static class A {
+//        public void a() {
+//            System.out.println("parent");
+//        }
+//    }
+//
+//    static class B extends A {
+//        @Override
+//        public void a() {
+//            System.out.println("child");
+//        }
+//    }
 }
