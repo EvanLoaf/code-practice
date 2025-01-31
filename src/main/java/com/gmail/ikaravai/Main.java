@@ -5,6 +5,7 @@ import com.gmail.ikaravai.problems.HanoiTower;
 import com.gmail.ikaravai.problems.LettersCounter;
 import com.gmail.ikaravai.problems.StringPermutation;
 import com.gmail.ikaravai.sort.BubbleSort;
+import com.gmail.ikaravai.sort.QuickSort;
 import com.gmail.ikaravai.util.CustomLogFormatter;
 import com.gmail.ikaravai.util.ExecutionTimer;
 
@@ -30,14 +31,24 @@ public class Main {
 //        fibonacci();
 //        hanoiTower();
 //        stringPermutation();
-        bubbleSort();
+//        bubbleSort();
+        quickSort();
+    }
+
+    private static void quickSort() {
+        var quickSort = new QuickSort();
+        List<Integer> input = new ArrayList<>(IntStream.range(0, 100).boxed().toList());
+        Collections.shuffle(input);
+        logger.info(STR."Input: \{input}");
+        var inputArray = input.stream().mapToInt(Integer::intValue).toArray();
+        var result = quickSort.sort(inputArray, 0, inputArray.length - 1);
+        logger.info(STR."Result: \{Arrays.toString(result)}");
     }
 
     private static void bubbleSort() {
         var bubbleSort = new BubbleSort();
         List<Integer> input = new ArrayList<>(IntStream.range(0, 100).boxed().toList());
         Collections.shuffle(input);
-        System.out.println(input);
         logger.info(STR."Input: \{input}");
         var result = bubbleSort.sort(input.stream().mapToInt(Integer::intValue).toArray());
         logger.info(STR."Result: \{Arrays.toString(result)}");
