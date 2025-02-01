@@ -5,6 +5,7 @@ import com.gmail.ikaravai.problems.HanoiTower;
 import com.gmail.ikaravai.problems.LettersCounter;
 import com.gmail.ikaravai.problems.StringPermutation;
 import com.gmail.ikaravai.sort.BubbleSort;
+import com.gmail.ikaravai.sort.InsertionSort;
 import com.gmail.ikaravai.sort.QuickSort;
 import com.gmail.ikaravai.util.CustomLogFormatter;
 import com.gmail.ikaravai.util.ExecutionTimer;
@@ -24,7 +25,7 @@ public class Main {
     public static void main(String[] args) {
         setLogFormat();
 
-        sandbox();
+//        sandbox();
 
 
 //        lettersCounter();
@@ -32,13 +33,22 @@ public class Main {
 //        hanoiTower();
 //        stringPermutation();
 //        bubbleSort();
-        quickSort();
+//        quickSort();
+        insertionSort();
+    }
+
+    private static void insertionSort() {
+        var insertionSort = new InsertionSort();
+        var input = prepareSortingInput();
+        logger.info(STR."Input: \{input}");
+        var inputArray = input.stream().mapToInt(Integer::intValue).toArray();
+        var result = insertionSort.sort(inputArray);
+        logger.info(STR."Result: \{Arrays.toString(result)}");
     }
 
     private static void quickSort() {
         var quickSort = new QuickSort();
-        List<Integer> input = new ArrayList<>(IntStream.range(0, 100).boxed().toList());
-        Collections.shuffle(input);
+        var input = prepareSortingInput();
         logger.info(STR."Input: \{input}");
         var inputArray = input.stream().mapToInt(Integer::intValue).toArray();
         var result = quickSort.sort(inputArray, 0, inputArray.length - 1);
@@ -47,11 +57,16 @@ public class Main {
 
     private static void bubbleSort() {
         var bubbleSort = new BubbleSort();
-        List<Integer> input = new ArrayList<>(IntStream.range(0, 100).boxed().toList());
-        Collections.shuffle(input);
+        var input = prepareSortingInput();
         logger.info(STR."Input: \{input}");
         var result = bubbleSort.sort(input.stream().mapToInt(Integer::intValue).toArray());
         logger.info(STR."Result: \{Arrays.toString(result)}");
+    }
+
+    private static List<Integer> prepareSortingInput() {
+        List<Integer> input = new ArrayList<>(IntStream.range(0, 100).boxed().toList());
+        Collections.shuffle(input);
+        return input;
     }
 
     private static void lettersCounter() {
